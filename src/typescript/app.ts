@@ -16,7 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import * as m from 'mithril';
+// Import Libs
+ import * as m from 'mithril';
+
+// Global vars
+declare var ons: any;
 
 // Import namespaces
 import { App } from './namespaces/App';
@@ -55,4 +59,6 @@ var app = {
     }
 };
 
-app.initialize();
+ons.ready(function () {
+    app.initialize();
+})
