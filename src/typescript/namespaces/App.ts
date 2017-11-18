@@ -1,12 +1,12 @@
 interface State {
-  mode: String;
+  sidebar: boolean;
   users: any;
   todos: Array<object>;
 }
 
 export namespace App {
   export const state: State = {
-    mode: 'view',
+    sidebar: true,
     users: [],
     todos: []
   };

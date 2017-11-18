@@ -9,13 +9,19 @@ import MainLayout from '../layouts/Main';
 
 // Import components
 import LoginComponent from '../components/Login';
+import ToolbarComponent from '../components/Toolbar';
+import SidebarComponent from '../components/Sidebar';
+import TabbarComponent from '../components/Tabbar';
 import OnsenComponent from '../components/Onsen';
 
 export default class LoginPage {
   view (vnode: any) {
     return m(MainLayout, {
       class: 'app',
-      main: m(OnsenComponent)
+      toolBar: m(ToolbarComponent),
+      sidebar: m(SidebarComponent),
+      main: m(LoginComponent),
+      tabBar: m(TabbarComponent)
     });
   }
 }
