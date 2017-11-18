@@ -12,7 +12,6 @@ import LoginComponent from '../components/Login';
 import ToolbarComponent from '../components/Toolbar';
 import SidebarComponent from '../components/Sidebar';
 import TabbarComponent from '../components/Tabbar';
-import OnsenComponent from '../components/Onsen';
 
 export default class LoginPage {
   view (vnode: any) {

@@ -9,6 +9,9 @@ import MainLayout from '../layouts/Main';
 
 // Import components
 import TodoListComponent from '../components/TodoList';
+import ToolbarComponent from '../components/Toolbar';
+import SidebarComponent from '../components/Sidebar';
+import TabbarComponent from '../components/Tabbar';
 
 export default class HomePage {
   oninit (vnode: any) {
@@ -17,10 +20,10 @@ export default class HomePage {
   view (vnode: any) {
     return m(MainLayout, {
       class: 'app',
-      main: m(TodoListComponent, {
-        title: 'Home',
-        todos: App.state.todos
-      })
+      toolBar: m(ToolbarComponent),
+      sidebar: m(SidebarComponent),
+      main: m(TodoListComponent, {todos: App.state.todos}),
+      tabBar: m(TabbarComponent)
     });
   }
 }
