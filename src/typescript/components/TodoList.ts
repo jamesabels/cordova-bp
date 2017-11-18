@@ -15,23 +15,24 @@ const state: any = {
 
 // View
 export default class TodoListComponent {
-    _onSubmit (e: any) {
+    _onSubmit(e: any, input: string, dialog: string) {
         e.preventDefault();
-        let input = e.srcElement[0];
-        if (input.value.length === 0) {
+        let todoInput: any = document.querySelector(input);
+        if (todoInput.value.length === 0) {
             return;
-        } else if (input.value.length > 0) {
-            App.state.todos.push({value: input.value });
-            input.value = null;
+        } else if (todoInput.value.length > 0) {
+            App.state.todos.push({ value: todoInput.value });
+            todoInput.value = null;
         } else {
             return;
         }
+        App.hideDialog(dialog);
     }
-    _onDelete (todo: any) {
+    _onDelete(todo: any) {
         let todos = App.state.todos;
         todos.splice(todos.indexOf(todo), 1);
     }
-    _onUpdate (e: any, oldTodo: any) {
+    _onUpdate(e: any, oldTodo: any) {
         e.preventDefault();
         let todos = App.state.todos;
         let input: any = document.getElementById('todoUpdateInput');
@@ -51,7 +52,7 @@ export default class TodoListComponent {
             return;
         }
     }
-    _renderTodos (that: any, todos: any, editState: boolean) {
+    _renderTodos(that: any, todos: any, editState: boolean) {
         if (todos.length > 0) {
             return todos.map(function (todo: any) {
                 return (
@@ -66,39 +67,47 @@ export default class TodoListComponent {
             })
         } else {
             return [
-               m(EmptyComponent, {
-                verb: 'success',
-                icon: 'check',
-                title: 'You are out of things to do',
-                subtitle: `Assuming you're not a liar`,
-                action: that._renderInput(that)   
-               })
+                m(EmptyComponent, {
+                    verb: 'success',
+                    icon: 'check',
+                    title: 'You are out of things to do',
+                    subtitle: `Assuming you're not a liar`,
+                    action: null
+                })
             ]
         }
     }
-    _renderInput (that: any) {
-        return m('div#todo-input.form-wrap.m-2', [
-            m('form.form-group#todoForm', {onsubmit: (e) => { that._onSubmit(e) }}, [
-                m('div.card-header.columns', [
-                    m('input#todoInput.form-input.column.col-10', {ref: 'todo-input', type: 'text', placeholder: 'What do you need to do?' }),
-                    m('button.btn.btn-primary.ml-2.column', {type: 'submit' }, [
-                        m('i.icon.icon-check')
+    _renderInputDialog(that: any) {
+        return (
+            m('div.dialog-wrap', [
+                m('ons-alert-dialog#todoInputDialog', {cancelable: true}, [                    
+                    m('div.alert-dialog-title', [
+                        'Add Todo'
+                    ]),
+                    m('div.alert-dialog-content', [
+                        m('label', 'What do you have to do?'),
+                        m('input#todoDialogInput.text-input.text-input--underbar')
+                    ]),
+                    m('div.alert-dialog-footer', [
+                        m('button.alert-dialog-button alert-dialog-button--primal', {onclick: (e) => {that._onSubmit(e, '#todoDialogInput', '#todoInputDialog')}}, 'Add'),
+                        m('button.alert-dialog-button alert-dialog-button--primal', {onclick: (e) => {App.hideDialog('#todoInputDialog')}}, 'Cancel')
                     ])
                 ])
             ])
-        ])
+        )
     }
-    view (vnode: any) {
-        if(vnode.attrs.todos.length > 0) {
+    view(vnode: any) {
+        if (vnode.attrs.todos.length > 0) {
             return [
                 m('div.todo-wrap', [
-                    this._renderInput(this),
+                    this._renderInputDialog(this),
                     this._renderTodos(this, vnode.attrs.todos, state.edit)
                 ])
             ]
         } else {
             return [
                 m('div.todo-wrap', [
+                    this._renderInputDialog(this),
                     this._renderTodos(this, vnode.attrs.todos, state.edit)
                 ])
             ]
