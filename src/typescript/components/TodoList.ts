@@ -31,15 +31,12 @@ export default class TodoListComponent {
         let todos = App.state.todos;
         todos.splice(todos.indexOf(todo), 1);
     }
-    _onEdit () {
-        state.edit = !state.edit;
-        console.log('Edit Status', state.edit);
-    }
     _onUpdate (e: any, oldTodo: any) {
         e.preventDefault();
         let todos = App.state.todos;
-        let input = e.srcElement[0];
+        let input: any = document.getElementById('todoUpdateInput');
 
+        console.log('GETTING INPUT', input.value)
         // Get original object
         let index = todos.indexOf(oldTodo);
 
@@ -58,13 +55,13 @@ export default class TodoListComponent {
         if (todos.length > 0) {
             return todos.map(function (todo: any) {
                 return (
-                    m(TodoComponent, {
-                        todo: todo,
-                        onDelete: that._onDelete,
-                        onEdit: that._onEdit,
-                        editState: editState,
-                        onUpdate: that._onUpdate
-                    })
+                    m('ul.list', [
+                        m(TodoComponent, {
+                            todo: todo,
+                            onDelete: that._onDelete,
+                            onUpdate: that._onUpdate
+                        })
+                    ])
                 )
             })
         } else {
