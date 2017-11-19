@@ -4,15 +4,12 @@ import * as m from 'mithril';
 export default class EmptyComponent {
     view (vnode: any) {
         return [
-            m('div#empty-todo.empty', {style: {backgroundColor: 'white'} }, [
+            m('div.empty-wrap', {style: {backgroundColor: '#eceff1', textAlign:'center', padding: '50px 0 0 0'} }, [
                 m('div.empty-icon', [
-                    m(`i.icon.icon-4x.text-${vnode.attrs.verb}.icon-${vnode.attrs.icon}`)
+                    m(`ons-icon`, {icon: 'ion-checkmark', style: {fontSize: '50px', color: 'lightgrey'}})
                 ]),
-                m('p.empty-title.h5', vnode.attrs.title),
-                m('p.empty-subtitle', vnode.attrs.subtitle),
-                m('div.empty-action', [
-                    vnode.attrs.action
-                ])
+                m('h3.empty-title', {style: {color: 'lightgrey'}}, vnode.attrs.title),
+                m('p.empty-subtitle', {style: {color: 'lightgrey'}}, vnode.attrs.subtitle),
             ])
         ]
     }
