@@ -17,10 +17,10 @@ export default class LoginPage {
   view (vnode: any) {
     return m(MainLayout, {
       class: 'app',
-      toolBar: m(ToolbarComponent),
+      toolBar: null,
       sidebar: m(SidebarComponent),
       main: m(LoginComponent),
-      tabBar: m(TabbarComponent)
+      tabBar: null
     });
   }
 }

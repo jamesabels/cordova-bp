@@ -9,19 +9,23 @@ export default class LoginComponent {
     }
     view (vnode: any) {
         return [
-            m('div.form-wrap.column.col-8.centered.mt-2.panel', {style: {marginTop: '10%'}},  [
-                m('div.panel-header.text-center', [
+            m('ons-card', {style: {marginTop: '10%'}},  [
+                m('div.card-title', [
                     m('h1.login-title', 'Login')
                 ]),
-                m('form#login-form.form-group.panel-body', {style: {backgroundColor: 'white'}, onsubmit: (e) => {this._submitForm(e)}}, [
-                    m('div#username-label.login-form.form-label', {for: 'username-input'}, 'Username'),
-                    m('input#username-input.mb-2.login-form.form-input', {type: 'text', name: 'username-input', placeholder:'Username'}),
-                    m('div#password-label.login-label.form-label', {for: 'password-input'}, 'Password'),
-                    m('input#username-input.mb-2.login-form.form-input', {type: 'password', name: 'password-input', placeholder:'Password'}),
-                    m('div.form-button-wrap.mt-2', [
-                        m('button#login-button.btn.btn-primary.mt-2.column.col-12', {type: 'sbumit'}, 'Login'),
-                        m('a.btn.btn-link.centered.mt-2', {href: '#!/register'}, 'Need an account?')
+                m('div.card-content', [
+                    m('form#login-form', {style: {backgroundColor: 'white'}, onsubmit: (e) => {this._submitForm(e)}}, [
+                        m('input#username-input.text-input.text-input--underbar',
+                        { type: 'text', name: 'username-input', placeholder:'Username', style:{ width: '100%', marginBottom: '30px' }}),
+                        m('input#username-input.text-input.text-input--underbar',
+                        { type: 'text', name: 'username-input', placeholder:'Password', style:{ width: '100%', marginBottom: '20px' }}),
+                        m('div.form-button-wrap', {style:{marginTop: '10px'}}, [
+                            m('button#login-button.button--large--cta', {type: 'sbumit'}, 'Login'),
+                        ])
                     ])
+                ]),
+                m('div.form-button-wrap.mt-2', [
+                    m('a.button.button--quiet', {href: '#!/register'}, 'Need an account?')
                 ])
             ])
         ];
