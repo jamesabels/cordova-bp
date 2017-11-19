@@ -24,7 +24,7 @@ export default class LoginComponent {
                         ])
                     ])
                 ]),
-                m('div.form-button-wrap.mt-2', [
+                m('div', [
                     m('a.button.button--quiet', {href: '#!/register'}, 'Need an account?')
                 ])
             ])

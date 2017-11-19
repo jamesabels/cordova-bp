@@ -17,10 +17,10 @@ export default class RegisterPage {
   view (vnode: any) {
     return m(MainLayout, {
       class: 'app',
-      toolBar: m(ToolbarComponent),
+      toolBar: null,
       sidebar: m(SidebarComponent),
       main: m(RegisterComponent),
-      tabBar: m(TabbarComponent)
+      tabBar: null
     });
   }
 }
