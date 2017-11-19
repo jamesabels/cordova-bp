@@ -1,18 +1,16 @@
 import * as m from 'mithril';
 declare var ons: any;
 
-// Import components
-import ErrorToast from '../components/ErrorToast';
-
 // Import namespaces
 import { App } from '../namespaces/App';
-import { Api } from '../namespaces/Api';
+import { Http } from '../namespaces/Http';
 
 export default class MainLayout {
   _renderError (verb: string, message: string) {
-    if (Api.state.error.length > 0) {
-      return m(ErrorToast, {verb, message})
-    }
+    ons.notification.toast({
+      message: `${verb}: ${message}`,
+      timeout: '2000'
+    });
   }
 
   _renderSidebar (sidebar: boolean) {
@@ -47,17 +45,12 @@ export default class MainLayout {
   }
 
   view (vnode: any) {
-    if (Api.state.error.length > 0) {
-      return (m("div#error-toast", vnode.attrs, [
-        this._renderError(
-          Api.state.error[0].verb,
-          Api.state.error[0].message
-        )
-      ]),
-      this._renderLayout(vnode, this)
-    )
-    } else {
-      return this._renderLayout(vnode, this)
+    if (Http.state.error.length > 0) {
+      this._renderError(
+        Http.state.error[0].verb,
+        Http.state.error[0].message
+      )    
     }
+    return this._renderLayout(vnode, this)
   }
 }

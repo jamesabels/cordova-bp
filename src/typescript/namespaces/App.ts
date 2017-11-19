@@ -18,6 +18,10 @@ export namespace App {
     let el: any = document.querySelector(element);
     el.hide();
   }
+  export function toggleToast (element: string) {
+    let el: any = document.querySelector(element);
+    el.toggle();
+  }
   export function setState(stateKey: string, value: any) {
     state[stateKey] = value;
   }
